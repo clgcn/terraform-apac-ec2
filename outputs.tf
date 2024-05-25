@@ -14,6 +14,11 @@ output "arn" {
   )
 }
 
+output "tags" {
+  description = "The tags of instance"
+  value       = aws_instance.ec2.tags_all
+}
+
 output "instance_state" {
   description = "The state of the instance"
   value = try(
