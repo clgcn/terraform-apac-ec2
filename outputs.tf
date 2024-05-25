@@ -21,3 +21,8 @@ output "instance_state" {
     null,
   )
 }
+
+output "instance_type" {
+  description = "The instance type of instance"
+  value       = aws_instance.ec2.instance_type
+}
