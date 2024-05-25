@@ -14,15 +14,15 @@ data "aws_ami" "ubuntu" {
 resource "aws_vpc" "vpc" {
   cidr_block = "172.16.0.0/16"
   tags = merge({ Name = "${var.name_prefix}vpc" }, var.tags, {
-    tw_apac_git_commit           = "f4513394e68c4b135e36f279fe5a97c994971574"
-    tw_apac_git_file             = "terraform-apac-ec2/main.tf"
-    tw_apac_git_last_modified_at = "2024-05-25 03:26:42"
+    tw_apac_git_commit           = "1c589b345ab4ac849c6845818204041e1ba0d7ec"
+    tw_apac_git_file             = "main.tf"
+    tw_apac_git_last_modified_at = "2024-05-25 04:15:20"
     tw_apac_git_last_modified_by = "clguo@thoughtworks.com"
     tw_apac_git_modifiers        = "clguo"
     tw_apac_git_org              = "clgcn"
-    tw_apac_git_repo             = "example-terraform"
+    tw_apac_git_repo             = "terraform-apac-ec2"
     tw_apac_yor_name             = "vpc"
-    tw_apac_yor_trace            = "063b45ee-3c46-4a5d-a9f0-540c0e662506"
+    tw_apac_yor_trace            = "673c6e7b-8c9d-41aa-b7e2-9b882bb579b6"
   })
 }
 
@@ -30,15 +30,15 @@ resource "aws_subnet" "subnet" {
   vpc_id     = aws_vpc.vpc.id
   cidr_block = "172.16.10.0/24"
   tags = merge({ Name = "${var.name_prefix}subnet" }, var.tags, {
-    tw_apac_git_commit           = "f4513394e68c4b135e36f279fe5a97c994971574"
-    tw_apac_git_file             = "terraform-apac-ec2/main.tf"
-    tw_apac_git_last_modified_at = "2024-05-25 03:26:42"
+    tw_apac_git_commit           = "1c589b345ab4ac849c6845818204041e1ba0d7ec"
+    tw_apac_git_file             = "main.tf"
+    tw_apac_git_last_modified_at = "2024-05-25 04:15:20"
     tw_apac_git_last_modified_by = "clguo@thoughtworks.com"
     tw_apac_git_modifiers        = "clguo"
     tw_apac_git_org              = "clgcn"
-    tw_apac_git_repo             = "example-terraform"
+    tw_apac_git_repo             = "terraform-apac-ec2"
     tw_apac_yor_name             = "subnet"
-    tw_apac_yor_trace            = "c8f67920-d029-4fe7-80d7-6e0c8ce1f873"
+    tw_apac_yor_trace            = "1ac992ee-7257-4f1a-849a-88a76f04516a"
   })
 }
 
@@ -46,15 +46,15 @@ resource "aws_network_interface" "interface" {
   subnet_id   = aws_subnet.subnet.id
   private_ips = ["172.16.10.100"]
   tags = merge({ Name = "${var.name_prefix}interface" }, var.tags, {
-    tw_apac_git_commit           = "f4513394e68c4b135e36f279fe5a97c994971574"
-    tw_apac_git_file             = "terraform-apac-ec2/main.tf"
-    tw_apac_git_last_modified_at = "2024-05-25 03:26:42"
+    tw_apac_git_commit           = "1c589b345ab4ac849c6845818204041e1ba0d7ec"
+    tw_apac_git_file             = "main.tf"
+    tw_apac_git_last_modified_at = "2024-05-25 04:15:20"
     tw_apac_git_last_modified_by = "clguo@thoughtworks.com"
     tw_apac_git_modifiers        = "clguo"
     tw_apac_git_org              = "clgcn"
-    tw_apac_git_repo             = "example-terraform"
+    tw_apac_git_repo             = "terraform-apac-ec2"
     tw_apac_yor_name             = "interface"
-    tw_apac_yor_trace            = "2c54c444-8825-486c-a2b2-5e322eb816c2"
+    tw_apac_yor_trace            = "35232970-f7ab-445c-b0bc-f41031a44e1e"
   })
 }
 
@@ -66,14 +66,14 @@ resource "aws_instance" "ec2" {
     device_index         = 0
   }
   tags = merge({ Name = "${var.name_prefix}instance" }, var.tags, (/*<box>*/ (var.tracing_tags_enabled ? { for k, v in /*</box>*/ {
-    tw_apac_git_commit           = "f4513394e68c4b135e36f279fe5a97c994971574"
-    tw_apac_git_file             = "terraform-apac-ec2/main.tf"
-    tw_apac_git_last_modified_at = "2024-05-25 03:26:42"
+    tw_apac_git_commit           = "1c589b345ab4ac849c6845818204041e1ba0d7ec"
+    tw_apac_git_file             = "main.tf"
+    tw_apac_git_last_modified_at = "2024-05-25 04:15:20"
     tw_apac_git_last_modified_by = "clguo@thoughtworks.com"
     tw_apac_git_modifiers        = "clguo"
     tw_apac_git_org              = "clgcn"
-    tw_apac_git_repo             = "example-terraform"
+    tw_apac_git_repo             = "terraform-apac-ec2"
     tw_apac_yor_name             = "ec2"
-    tw_apac_yor_trace            = "c0c4dca3-06f7-4a26-994b-fa8f34d0b607"
+    tw_apac_yor_trace            = "48be4070-a446-425b-bcfd-daaece5f1ebc"
   } /*<box>*/ : replace(k, "tw_apac_", var.tracing_tags_prefix) => v } : {}) /*</box>*/))
 }
