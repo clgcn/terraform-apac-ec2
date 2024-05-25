@@ -5,6 +5,12 @@ variable "instance_type" {
   default     = "t3.micro"
 }
 
+variable "name_prefix" {
+  type        = string
+  description = "The name prefix of resource"
+  default     = ""
+}
+
 variable "tags" {
   type = map(string)
   default = {

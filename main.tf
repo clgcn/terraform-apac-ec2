@@ -13,7 +13,7 @@ data "aws_ami" "ubuntu" {
 
 resource "aws_vpc" "vpc" {
   cidr_block = "172.16.0.0/16"
-  tags = merge(var.tags, {
+  tags = merge({ Name = "${var.name_prefix}vpc" }, var.tags, {
     tw_apac_git_commit           = "f4513394e68c4b135e36f279fe5a97c994971574"
     tw_apac_git_file             = "terraform-apac-ec2/main.tf"
     tw_apac_git_last_modified_at = "2024-05-25 03:26:42"
@@ -29,7 +29,7 @@ resource "aws_vpc" "vpc" {
 resource "aws_subnet" "subnet" {
   vpc_id     = aws_vpc.vpc.id
   cidr_block = "172.16.10.0/24"
-  tags = merge(var.tags, {
+  tags = merge({ Name = "${var.name_prefix}subnet" }, var.tags, {
     tw_apac_git_commit           = "f4513394e68c4b135e36f279fe5a97c994971574"
     tw_apac_git_file             = "terraform-apac-ec2/main.tf"
     tw_apac_git_last_modified_at = "2024-05-25 03:26:42"
@@ -45,7 +45,7 @@ resource "aws_subnet" "subnet" {
 resource "aws_network_interface" "interface" {
   subnet_id   = aws_subnet.subnet.id
   private_ips = ["172.16.10.100"]
-  tags = merge(var.tags, {
+  tags = merge({ Name = "${var.name_prefix}interface" }, var.tags, {
     tw_apac_git_commit           = "f4513394e68c4b135e36f279fe5a97c994971574"
     tw_apac_git_file             = "terraform-apac-ec2/main.tf"
     tw_apac_git_last_modified_at = "2024-05-25 03:26:42"
@@ -65,7 +65,7 @@ resource "aws_instance" "ec2" {
     network_interface_id = aws_network_interface.interface.id
     device_index         = 0
   }
-  tags = merge(var.tags, (/*<box>*/ (var.tracing_tags_enabled ? { for k, v in /*</box>*/ {
+  tags = merge({ Name = "${var.name_prefix}instance" }, var.tags, (/*<box>*/ (var.tracing_tags_enabled ? { for k, v in /*</box>*/ {
     tw_apac_git_commit           = "f4513394e68c4b135e36f279fe5a97c994971574"
     tw_apac_git_file             = "terraform-apac-ec2/main.tf"
     tw_apac_git_last_modified_at = "2024-05-25 03:26:42"
